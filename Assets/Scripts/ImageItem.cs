@@ -22,13 +22,7 @@ public class ImageItem : MonoBehaviour
     {
         if (shake)
         {
-            // Shake Animation
-            //transform.DOShakePosition(1f, new Vector3(5f, 5f, 0), 10, 90, false, true).SetLoops(-1, LoopType.Yoyo);
-            transform.DOShakeRotation(1f, new Vector3(0, 0, 5f), 10, 90, false).SetLoops(-1, LoopType.Yoyo).OnUpdate(() =>
-            {
-                
-            });
-
+            transform.DOShakeRotation(1f, new Vector3(0, 0, 5f), 10, 90, false).SetLoops(-1, LoopType.Yoyo);
         }
     }
 
@@ -100,9 +94,6 @@ public class ImageItem : MonoBehaviour
         image.DOFade(0f, manager.animationDuration)
             .OnComplete(() => gameObject.SetActive(false));
     }
-
-
-
     public enum Position
     {
         Left,

@@ -61,14 +61,5 @@ public class NoticeManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             DOTween.To(() => rectTransformComponent.anchoredPosition, x => rectTransformComponent.anchoredPosition = x, rectTransform, 0.5f).SetEase(Ease.OutExpo);
     }
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+   
 }

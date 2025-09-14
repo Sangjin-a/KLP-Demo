@@ -12,12 +12,6 @@ public class ProgressBarManager : MonoBehaviour
         Sample();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Sample()
     {
         DOTween.To(() => currentImage.fillAmount, x => currentImage.fillAmount = x, 1f, 5f).SetEase(Ease.Linear).onUpdate = UpdateTextValue;
