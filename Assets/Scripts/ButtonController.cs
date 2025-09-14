@@ -22,6 +22,7 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private GameObject popUpNotice;
     private UIEffect uIEffect;
     private bool isClicked = false;
+
     private void Awake()
     {
         shinyEffect = GetComponent<ShinyEffectForUGUI>();
@@ -45,6 +46,7 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
             //seq.Join(gameObject.transform.DOScale(1.5f, 1.5f));
             Invoke("DemoUIActive", activeAnimDuration);
         });
+
     }
 
     public void PopUpNoticeActive()
@@ -86,5 +88,10 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
             uIEffect.edgeShinyAutoPlaySpeed = 0f;
             uIEffect.edgeShinyWidth = 0f;
         }
+    }
+
+    public void Shake()
+    {
+        gameObject.transform.DOShakeRotation(activeAnimDuration, new Vector3(0, 0, 30), 10, 90, false).SetEase(Ease.InOutSine);
     }
 }

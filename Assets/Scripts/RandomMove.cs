@@ -18,7 +18,7 @@ public class RandomMove : MonoBehaviour
     private Vector3 dir;
     private Vector3[] corners = new Vector3[4];
     private bool canMove = true;
-
+    [SerializeField] private GameObject effect;
     private void Awake()
     {
         originPos = transform.position;
@@ -41,7 +41,7 @@ public class RandomMove : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (canMove)
         {
@@ -82,7 +82,10 @@ public class RandomMove : MonoBehaviour
     /// </summary>
     public void Effect()
     {
+        gameObject.transform.DOKill();
+        gameObject.transform.localScale = Vector3.one / 2;
         gameObject.transform.DOPunchScale(new Vector3(punchScale, punchScale, 0), 0.2f, 10, 1).SetUpdate(true);
+        Instantiate(effect, transform.position, Quaternion.identity);
     }
 
     /// <summary>
@@ -93,7 +96,7 @@ public class RandomMove : MonoBehaviour
         canMove = false;
         gameObject.transform.DOKill();
         Sequence seq = DOTween.Sequence();
-        seq.Append(gameObject.transform.DOMove(originPos , duration).SetUpdate(true));
+        seq.Append(gameObject.transform.DOMove(originPos, duration).SetUpdate(true));
         seq.Join(gameObject.transform.DOScale(2, duration).SetUpdate(true));
     }
 
