@@ -10,7 +10,7 @@ public class RandomMove : MonoBehaviour
 
     private float punchScale = 1.5f;
     private float resetSpeed = 2f;
-    private Transform originTrasform;
+    private Vector3 originPos;
 
 
     private Camera cam;
@@ -21,7 +21,7 @@ public class RandomMove : MonoBehaviour
 
     private void Awake()
     {
-        originTrasform = transform;
+        originPos = transform.position;
     }
     void Start()
     {
@@ -92,7 +92,7 @@ public class RandomMove : MonoBehaviour
     {
         canMove = false;
         gameObject.transform.DOKill();
-        gameObject.transform.DOMove(originTrasform.position, resetSpeed).SetUpdate(true);
+        gameObject.transform.DOMove(originPos, 5).SetUpdate(true);
     }
 
     private void OnDrawGizmos()
