@@ -22,7 +22,7 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private GameObject popUpNotice;
     private UIEffect uIEffect;
     private bool isClicked = false;
-
+    [SerializeField] Canvas canvas;
     private void Awake()
     {
         shinyEffect = GetComponent<ShinyEffectForUGUI>();
@@ -43,7 +43,6 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
             StartCoroutine(CoBlurDeaActive());
             Sequence seq = DOTween.Sequence();
             seq.Append(gameObject.GetComponent<RectTransform>().DOAnchorPos(deActivePos, 1.5f).SetEase(Ease.InBack));
-            //seq.Join(gameObject.transform.DOScale(1.5f, 1.5f));
             Invoke("DemoUIActive", activeAnimDuration);
         });
 
@@ -56,6 +55,8 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void DemoUIActive()
     {
         demoPanel.SetActive(true);
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.planeDistance = 1;
         Invoke("PopUpNoticeActive", 8);
     }
     private IEnumerator CoBlurDeaActive()

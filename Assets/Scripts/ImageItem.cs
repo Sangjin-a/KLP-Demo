@@ -1,3 +1,4 @@
+using Coffee.UIEffects;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,10 +10,12 @@ public class ImageItem : MonoBehaviour
     private SwipeQueueManager manager;
     public Position position = Position.Deactivated;
     [SerializeField] private bool shake = false;
+    private UIEffect uIEffect;
     private void Awake()
     {
         image = GetComponent<Image>();
         manager = FindAnyObjectByType<SwipeQueueManager>();
+
     }
 
     private void Start()
@@ -20,8 +23,12 @@ public class ImageItem : MonoBehaviour
         if (shake)
         {
             // Shake Animation
-            transform.DOShakePosition(1f, new Vector3(5f, 5f, 0), 10, 90, false, true).SetLoops(-1, LoopType.Yoyo);
-            transform.DOShakeRotation(1f, new Vector3(0, 0, 5f), 10, 90, false).SetLoops(-1, LoopType.Yoyo);
+            //transform.DOShakePosition(1f, new Vector3(5f, 5f, 0), 10, 90, false, true).SetLoops(-1, LoopType.Yoyo);
+            transform.DOShakeRotation(1f, new Vector3(0, 0, 5f), 10, 90, false).SetLoops(-1, LoopType.Yoyo).OnUpdate(() =>
+            {
+                
+            });
+
         }
     }
 

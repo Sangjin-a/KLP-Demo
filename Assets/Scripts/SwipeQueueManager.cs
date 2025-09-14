@@ -69,8 +69,6 @@ public class SwipeQueueManager : MonoBehaviour, IBeginDragHandler, IDragHandler,
         startPos = eventData.position;
         startTime = Time.time;
         isDragging = true;
-
-        Debug.Log("드래그 시작!");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -80,8 +78,6 @@ public class SwipeQueueManager : MonoBehaviour, IBeginDragHandler, IDragHandler,
         {
             Vector2 currentPos = eventData.position;
             float deltaX = currentPos.x - startPos.x;
-
-
         }
     }
 
@@ -106,7 +102,6 @@ public class SwipeQueueManager : MonoBehaviour, IBeginDragHandler, IDragHandler,
         // 수직 움직임이 너무 크면 무시 (순수한 좌우 스와이프만 감지)
         if (Mathf.Abs(swipeVector.y) > swipeDistance * 0.5f)
         {
-            Debug.Log("세로 움직임이 너무 큽니다!");
             isDragging = false;
             return;
         }
@@ -135,8 +130,6 @@ public class SwipeQueueManager : MonoBehaviour, IBeginDragHandler, IDragHandler,
     }
     public void SwipeLeft()
     {
-        Debug.Log("왼쪽 스와이프!");
-
         ImageItem currentCenter = GetImageAtPosition(ImageItem.Position.Center);
         ImageItem currentRight = GetImageAtPosition(ImageItem.Position.Right);
         ImageItem currentLeft = GetImageAtPosition(ImageItem.Position.Left);
@@ -155,8 +148,6 @@ public class SwipeQueueManager : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void SwipeRight()
     {
-        Debug.Log("오른쪽 스와이프!");
-
         ImageItem currentCenter = GetImageAtPosition(ImageItem.Position.Center);
         ImageItem currentLeft = GetImageAtPosition(ImageItem.Position.Left);
         ImageItem currentRight = GetImageAtPosition(ImageItem.Position.Right);

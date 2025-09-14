@@ -47,7 +47,7 @@ public class NoticeManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
     public void OnDrag(PointerEventData eventData)
     {
-        gameObject.transform.position += new Vector3(0, eventData.delta.y, 0);
+        rectTransformComponent.anchoredPosition += new Vector2(0, eventData.delta.y);
         Debug.Log(rectTransformComponent.anchoredPosition.y);
     }
 
