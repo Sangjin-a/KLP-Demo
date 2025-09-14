@@ -38,6 +38,20 @@ ShaderVariantCollection:
         passType: 0
       - keywords: EDGE_SHINY
         passType: 0
+      - keywords: EDGE_SHINY GRADATION_COLOR2
+        passType: 0
+      - keywords: EDGE_SHINY GRADATION_COLOR4
+        passType: 0
+      - keywords: EDGE_SHINY GRADATION_COLOR4 SAMPLING_BLUR_DETAIL
+        passType: 0
+      - keywords: EDGE_SHINY GRADATION_COLOR4 SAMPLING_BLUR_FAST
+        passType: 0
+      - keywords: EDGE_SHINY GRADATION_COLOR4 SAMPLING_BLUR_MEDIUM
+        passType: 0
+      - keywords: EDGE_SHINY GRADATION_COLOR4 SAMPLING_EDGE_ALPHA
+        passType: 0
+      - keywords: EDGE_SHINY GRADATION_GRADIENT
+        passType: 0
       - keywords: EDGE_SHINY SAMPLING_BLUR_FAST
         passType: 0
       - keywords: EDGE_SHINY SAMPLING_BLUR_MEDIUM
@@ -63,4 +77,6 @@ ShaderVariantCollection:
       - keywords: EDGE_SHINY TRANSITION_PATTERN
         passType: 0
       - keywords: EDGE_SHINY TRANSITION_SHINY
+        passType: 0
+      - keywords: GRADATION_COLOR2
         passType: 0

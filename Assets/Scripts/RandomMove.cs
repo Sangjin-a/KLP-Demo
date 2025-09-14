@@ -88,11 +88,13 @@ public class RandomMove : MonoBehaviour
     /// <summary>
     /// 버튼 클릭 이벤트로 사용
     /// </summary>
-    public void ResetTransform()
+    public void ResetTransform(float duration)
     {
         canMove = false;
         gameObject.transform.DOKill();
-        gameObject.transform.DOMove(originPos, 5).SetUpdate(true);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(gameObject.transform.DOMove(originPos , duration).SetUpdate(true));
+        seq.Join(gameObject.transform.DOScale(2, duration).SetUpdate(true));
     }
 
     private void OnDrawGizmos()

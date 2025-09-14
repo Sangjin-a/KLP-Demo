@@ -1,3 +1,4 @@
+using Coffee.UIEffects;
 using Coffee.UIExtensions;
 using DG.Tweening;
 using System.Collections;
@@ -14,9 +15,21 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     [SerializeField] private RandomMove[] randomMove;
     [SerializeField] private Vector3 deActivePos;
+
+    [SerializeField] private GameObject demoPanel;
+    [SerializeField] private float activeAnimDuration = 5f;
+
+    [SerializeField] private GameObject popUpNotice;
+    private UIEffect uIEffect;
+    private bool isClicked = false;
     private void Awake()
     {
         shinyEffect = GetComponent<ShinyEffectForUGUI>();
+        popUpNotice.SetActive(false);
+        uIEffect = GetComponent<UIEffect>();
+        uIEffect.edgeShinyAutoPlaySpeed = 0f;
+        uIEffect.edgeShinyWidth = 0;
+
         //image = GetComponent<Image>();
     }
     void Start()
@@ -24,15 +37,25 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
         button = GetComponent<Button>();
         button.onClick.AddListener(() =>
         {
+            isClicked = true;
             ActiveDemo();
             StartCoroutine(CoBlurDeaActive());
-            gameObject.GetComponent<RectTransform>().DOAnchorPos(deActivePos, 1.5f).SetEase(Ease.InBack).OnComplete(() =>
-            {
-
-            });
+            Sequence seq = DOTween.Sequence();
+            seq.Append(gameObject.GetComponent<RectTransform>().DOAnchorPos(deActivePos, 1.5f).SetEase(Ease.InBack));
+            //seq.Join(gameObject.transform.DOScale(1.5f, 1.5f));
+            Invoke("DemoUIActive", activeAnimDuration);
         });
     }
 
+    public void PopUpNoticeActive()
+    {
+        popUpNotice.SetActive(true);
+    }
+    public void DemoUIActive()
+    {
+        demoPanel.SetActive(true);
+        Invoke("PopUpNoticeActive", 8);
+    }
     private IEnumerator CoBlurDeaActive()
     {
         while (image.color.a >= 0)
@@ -46,16 +69,22 @@ public class ButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         foreach (var item in randomMove)
         {
-            item.ResetTransform();
+            item.ResetTransform(activeAnimDuration);
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
         shinyEffect.Play(0.5f, AnimatorUpdateMode.UnscaledTime);
+        uIEffect.edgeShinyWidth = 0.2f;
+        uIEffect.edgeShinyAutoPlaySpeed = 1f;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //shinyEffect.Play(0.5f, AnimatorUpdateMode.UnscaledTime);
+        if (isClicked == false)
+        {
+            uIEffect.edgeShinyAutoPlaySpeed = 0f;
+            uIEffect.edgeShinyWidth = 0f;
+        }
     }
 }
